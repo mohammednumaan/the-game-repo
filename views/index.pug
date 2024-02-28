@@ -1,5 +1,17 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(class="header-container")
+    h1= title 
+
+  div(class="overview-container")
+    a(href="/games" class="card")
+      div( class="card-content")
+        h2 Game Count: #{games}
+        p Browse For Your Favourit Games Here!
+        
+
+    a(href="/games" class="card")
+      div(class="card-content") 
+        h2 Category Count: #{categories}
+        p Browse For Your Favourite Categories Here!
