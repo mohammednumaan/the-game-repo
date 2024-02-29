@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+    h2(class='section-title')= title 
+    if categories.length
+        ul(id="category-list") 
+            each category in categories
+                li 
+                    div(class='category-card')
+                        div(class='category-card-content')
+
+                            a(href=category.url)
+                                h2= category.name
+                            p #{category.description}
+                    

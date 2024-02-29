@@ -1,0 +1,15 @@
+extends layout 
+
+block content 
+    h2(class='section-title')= title 
+    if games.length
+        ul(id="game-list") 
+            each game in games
+                li 
+                    div(class='game-card')
+                        div(class='game-card-content')
+
+                            a(href=game.url)
+                                h2= game.name
+                            p #{game.description}
+                    

@@ -1,17 +1,15 @@
 extends layout
 
 block content
-  div(class="header-container")
-    h1= title 
-
+  
   div(class="overview-container")
-    a(href="/games" class="card")
+    a(href="/store/games" class="card")
       div( class="card-content")
         h2 Game Count: #{games}
-        p Browse For Your Favourit Games Here!
+        p Browse For Your Favourite Games Here!
         
 
-    a(href="/games" class="card")
+    a(href="/store/categories" class="card")
       div(class="card-content") 
         h2 Category Count: #{categories}
         p Browse For Your Favourite Categories Here!

@@ -15,11 +15,22 @@ a {
   color: rgb(255, 215, 137);
 }
 
+ul{
+  list-style: none;
+  padding-left: 0;
+}
+
 /* INDEX PAGE */
 .header-container{
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+}
+
+.nav-links{
+  display: flex;
+  gap: 30px;
 }
 
 .overview-container{
@@ -35,7 +46,9 @@ a {
   z-index: 2;
 }
 
-.card{
+.card,
+.game-card,
+.category-card{
   background-color: var(--card-color);
   border-radius: 0.75em;
   cursor: pointer;
@@ -44,11 +57,15 @@ a {
   position: relative;
 }
 
-.card:hover:before{
+.card:hover:before,
+.game-card:hover:before,
+.category-card:hover:before{
   opacity: 1;
 }
 
-.card:before {
+.card:before,
+.game-card:before,
+.category-card:before {
   background: linear-gradient(
     45deg,
     transparent 5%,
@@ -64,7 +81,9 @@ a {
   z-index: 0;
 }
 
-.card-content {
+.card-content, 
+.game-card-content,
+.category-card-content{
   background-color: var(--card-color);
   border-radius: inherit;
 
@@ -76,4 +95,24 @@ a {
   inset: 1px;
   padding: 1em;
   position: absolute;
+}
+
+/* ALL GAMES PAGE*/
+#game-list,
+#category-list{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 80px;
+  gap: 20px;
+}
+
+.game-card{
+  width: 400px;
+}
+
+.section-title{
+  margin-top: 100px;
+  text-align: center;
 }

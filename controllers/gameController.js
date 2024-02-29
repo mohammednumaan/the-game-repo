@@ -9,8 +9,18 @@ exports.index = asyncHandler(async (req, res, next) => {
     ])
 
     res.render("index", {
-        title: "The Game Repository",
+        heading: "The Game Repository",
         games: gameCount,
         categories: categoryCount
     })
-}) 
+})
+
+exports.game_list = asyncHandler(async (req, res, next) => {
+    const allGames = await Game.find().sort({name: 1}).populate("category").exec()
+
+    res.render("game_list", {
+        heading: "The Game Repository",
+        title: "Available Games",
+        games: allGames
+    })
+})
