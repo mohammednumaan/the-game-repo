@@ -6,7 +6,6 @@ exports.category_list = asyncHandler(async (req, res, next) => {
     const allCategories = await Category.find().sort({name: 1}).exec()
 
     res.render("category_list", {
-        heading: "The Game Repository",
         title: "Available Categories",
         categories: allCategories
     })

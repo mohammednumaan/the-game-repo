@@ -9,8 +9,9 @@ router.get('/', game_controller.index)
 
 // Routes for Game
 // router.get('/game/create', game_controller.create_get)
-// router.post('/game/create', game_controller.create_post) 
-router.get('/games', game_controller.game_list)
+// router.post('/game/create', game_controller.create_post)
+router.get('/games/:id', game_controller.game_detail); 
+router.get('/games', game_controller.game_list);
 
 // Category Route
 router.get('/categories', category_controller.category_list)

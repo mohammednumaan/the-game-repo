@@ -11,7 +11,7 @@ const GameSchema = new Schema({
 });
 
 GameSchema.virtual("url").get(function(){
-    return `/store/game/${this._id}`;
+    return `/store/games/${this._id}`;
 });
 
 module.exports = mongoose.model("Game", GameSchema);

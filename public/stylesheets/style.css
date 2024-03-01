@@ -1,5 +1,6 @@
 :root{
-  --card-color: rgb(25, 25, 25)
+  --card-color: rgb(25, 25, 25);
+  --stock-color: #009e60;
 }
 
 body{
@@ -115,4 +116,54 @@ ul{
 .section-title{
   margin-top: 100px;
   text-align: center;
+}
+
+/* GAME DETAIL STYLING */
+.game-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: calc(100vw - 90vw);
+  
+}
+
+.game-info-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: calc(100% - 60%);
+  padding: 20px;
+
+  border: 1px solid rgb(255, 215, 137);
+  border-radius: 10px;
+  box-shadow: rgba(255, 215, 137) 0px 3px 5px;
+}
+
+.game-top{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#game-dev{
+  margin-top: -10px;
+  opacity: 0.6;
+}
+
+.stock,
+.price{
+  color: var(--stock-color);
+  opacity: 0.8;
+}
+
+.game-buy-details{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  
+  
 }

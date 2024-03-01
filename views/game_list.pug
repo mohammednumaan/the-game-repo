@@ -6,10 +6,10 @@ block content
         ul(id="game-list") 
             each game in games
                 li 
-                    div(class='game-card')
-                        div(class='game-card-content')
-
-                            a(href=game.url)
+                    a(href=game.url)
+                        div(class='game-card')
+                            div(class='game-card-content')
                                 h2= game.name
-                            p #{game.description}
+                                p #{game.description}
+                                
                     

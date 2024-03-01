@@ -1,0 +1,16 @@
+extends layout 
+
+block content 
+
+    div(class="game-info")
+        div(class="game-info-container")
+            div(class="game-top")
+                h1= game.name 
+                p(id="game-dev")= game.developer
+
+            div(class="game-bottom")
+                h4 #{game.description}
+
+                div(class="game-buy-details")
+                    p(class="stock") In-Stock: #{game.stock}
+                    p(class="price") Price: $#{game.price}
