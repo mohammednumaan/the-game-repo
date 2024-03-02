@@ -10,21 +10,21 @@ block content
         
         div.form-group
             label(for='dev') Developer: 
-            input#name.form-control(type='text', placeholder='Developer' name='dev' required value=(undefined===game ? '' : game.developer))
+            input#dev.form-control(type='text', placeholder='Developer' name='dev' required value=(undefined===game ? '' : game.developer))
     
             
         div.form-group
             label(for='desc') Description: 
-            input#name.form-control(type='text', placeholder='Description' name='desc' required value=(undefined===game ? '' : game.description))
+            input#desc.form-control(type='text', placeholder='Description' name='desc' required value=(undefined===game ? '' : game.description))
 
         
         div.form-group
             label(for='price') Price: 
-            input#name.form-control(type='text', placeholder='Price' name='price' required value=(undefined===game ? '' : game.price))
+            input#price.form-control(type='text', placeholder='Price' name='price' required value=(undefined===game ? '' : game.price))
         
         div.form-group
             label(for='stock') In-Stock: 
-            input#name.form-control(type='text', placeholder='In-Stock' name='stock' required value=(undefined===game ? '' : game.stock))
+            input#stock.form-control(type='text', placeholder='In-Stock' name='stock' required value=(undefined===game ? '' : game.stock))
  
         div.form-group
             label Category: 

@@ -92,17 +92,15 @@ exports.create_post = [
         if(!errors.isEmpty()){
             const allCategories = await Category.find({}).sort({name: 1}).exec();
 
-            for (const category of allCategories){
-                if (game.category.includes(category._id)){
-                    category.checked = "true";
-                }
-            }
+            allCategories.forEach(category => {
+                if (game.category.includes(category._id)) category.checked = "true"
+            })
 
             res.render("game_form", {
                 title: "Create A New Game",
                 game: game,
                 categories: allCategories,
-                erros: errors.array()
+                errors: errors.array()
             })
         }
 
