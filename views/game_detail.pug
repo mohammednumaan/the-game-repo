@@ -12,5 +12,15 @@ block content
                 h4 #{game.description}
 
                 div(class="game-buy-details")
-                    p(class="stock") In-Stock: #{game.stock}
-                    p(class="price") Price: $#{game.price}
+                    each val, index in game.category
+                        p Category: #{game.category[0].name}
+                        if index < game.category.length - 1
+                            |,&nbsp;
+                            
+                    p In-Stock: #{game.stock}
+                    p Price: $#{game.price}
+
+                    
+                div(class="game-buy-links")
+                    a(href='/games/:id/delete') Delete This Game
+                    a(href='/games/:id/update') Update This Game

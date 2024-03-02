@@ -25,7 +25,7 @@ exports.game_list = asyncHandler(async (req, res, next) => {
 
 exports.game_detail = asyncHandler(async (req, res, next) => {
     const game = await Game.findById(req.params.id).populate("category").exec()
-
+    
     if (game === null){
         const err = new Error('Game Not Found');
         err.status = 404;

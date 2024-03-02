@@ -1,6 +1,7 @@
 :root{
   --card-color: rgb(25, 25, 25);
   --stock-color: #009e60;
+  --goldColor: rgb(255, 215, 137);
 }
 
 body{
@@ -13,12 +14,18 @@ body{
 
 a {
   text-decoration: none;
-  color: rgb(255, 215, 137);
+  color: var(--goldColor);
 }
 
 ul{
   list-style: none;
   padding-left: 0;
+}
+
+hr{
+  color: var(--goldColor);
+  opacity: 0.5;
+  margin-top: -16px;
 }
 
 /* INDEX PAGE */
@@ -70,7 +77,7 @@ ul{
   background: linear-gradient(
     45deg,
     transparent 5%,
-    rgb(255, 215, 137) 50%,
+    var(--goldColor) 50%,
     transparent 99%
   );
   border-radius: inherit;
@@ -136,9 +143,9 @@ ul{
   width: calc(100% - 60%);
   padding: 20px;
 
-  border: 1px solid rgb(255, 215, 137);
+  border: 1px solid var(--goldColor);
   border-radius: 10px;
-  box-shadow: rgba(255, 215, 137) 0px 3px 5px;
+  box-shadow: var(--goldColor) 0px 3px 5px;
 }
 
 .game-top{
@@ -153,17 +160,66 @@ ul{
   opacity: 0.6;
 }
 
-.stock,
-.price{
-  color: var(--stock-color);
-  opacity: 0.8;
-}
-
-.game-buy-details{
+.game-buy-details,
+.game-buy-links,
+.category-links{
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 30px;
-  
-  
+  gap: 30px; 
+}
+
+.game-buy-details > p{
+  color: var(--stock-color);
+}
+
+.game-buy-links > a,
+.category-links > a{
+  color: lightblue;
+}
+
+.game-list-title{
+  margin-top: 80px;
+}
+
+.category-info{
+  display: flex;
+  justify-content: center;
+}
+.category-info-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  width: calc(100% - 55%);
+  padding: 20px;
+}
+
+.category-bottom{
+  text-align: center;
+  gap: 20px;
+}
+.category-games{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.category-links{
+  border: 1px solid rg;
+}
+
+.category-bottom > hr{
+  width: 120px;
+}
+
+.category-game-card{
+  background-color: var(--card-color);
+  margin-top: 40px;
+  width: 330px;
+  padding: 4px;
+  border-radius: 10px;
 }

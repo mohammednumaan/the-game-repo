@@ -6,10 +6,9 @@ block content
         ul(id="category-list") 
             each category in categories
                 li 
-                    div(class='category-card')
-                        div(class='category-card-content')
-
-                            a(href=category.url)
+                    a(href=`${category.url}`)
+                        div(class='category-card')
+                            div(class='category-card-content')
                                 h2= category.name
-                            p #{category.description}
-                    
+                                p #{category.description}
+                        

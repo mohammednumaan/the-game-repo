@@ -1,0 +1,24 @@
+extends layout 
+
+block content 
+
+    div(class="category-info")
+        div(class="category-info-container")
+            div(class="category-top")
+                h1= category.name
+                hr
+
+            div(class="category-bottom")
+
+                h4 #{category.description}
+                div(class="category-links")
+                    a(href='/categories/:id/delete') Delete This Category
+                    a(href='/categories/:id/update') Update This Category
+
+                h3(class="game-list-title") List Of Games
+                hr
+                div(class="category-games")
+                    each game in games 
+                        a(href=`${game.url}` class="category-game-card")
+                            h3= game.name
+                            p= game.developer
