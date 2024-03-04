@@ -12,8 +12,8 @@ block content
 
                 h4 #{category.description}
                 div(class="category-links")
-                    a(href='/categories/:id/delete') Delete This Category
-                    a(href='/categories/:id/update') Update This Category
+                    a(href= category.url + '/delete') Delete This Category
+                    a(href= category.url + '/update') Update This Category
 
                 h3(class="game-list-title") List Of Games
                 hr

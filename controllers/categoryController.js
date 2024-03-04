@@ -61,7 +61,7 @@ exports.create_post = [
 
         if (!errors.isEmpty()){
             res.render("category_form", {
-                title: "Create A New Category",
+                title: "Update This Category",
                 category: category,
                 errors: errors.array()
             })
@@ -72,7 +72,58 @@ exports.create_post = [
             res.redirect(category.url)
         }
     })
+]
 
+exports.update_get = asyncHandler(async (req, res, next) => {
+    const category = await Category.findById(req.params.id).exec();
+
+    if (category === null){
+        const err = new Error('Category Not Found.')
+        err.status = 404;
+        return next(err)
+    }
+    res.render("category_form", {
+        title: 'Update This Category',
+        category: category
+    })
+})
+
+exports.update_post = [
+
+    body("category-name", "Category Name Must Not Be Empty.")
+        .trim()
+        .isLength({min : 3})
+        .withMessage("There Needs To Be Atleast 3 Characters")
+        .escape(),
     
+    body("category-desc", "Category Desc Must Not Be Empty.")
+        .trim()
+        .isLength({min : 1})
+        .withMessage("There Needs To Be Atleast 1 Character.")
+        .escape(),
 
+
+    asyncHandler(async (req, res, next) => {
+
+        const errors = validationResult(req);
+
+        const category = new Category({
+            name: req.body["category-name"],
+            description: req.body["category-desc"],
+            _id: req.params.id
+        })
+
+        if (!errors.isEmpty()){
+            res.render("category_form", {
+                title: "Update This Category",
+                category: category,
+                errors: errors.array()
+            })
+        }
+
+        else{
+            await Category.findByIdAndUpdate(req.params.id, category)
+            res.redirect(category.url)
+        }
+    })
 ]
