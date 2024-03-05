@@ -198,3 +198,19 @@ exports.update_post = [
         }
       })
 ]
+
+exports.delete_get = asyncHandler(async (req, res, next) => {
+    const game = await Game.findById(req.params.id).exec();
+
+    if (game === null) res.redirect('/store/games')
+
+    res.render("game_delete", {
+        title: 'Delete This Game',
+        game: game
+    })
+})
+
+exports.delete_post = asyncHandler(async (req, res, next) => {
+    await Game.findByIdAndDelete(req.body.gameid);
+    res.redirect('/store/games')
+})

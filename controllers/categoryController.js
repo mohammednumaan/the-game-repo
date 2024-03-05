@@ -127,3 +127,23 @@ exports.update_post = [
         }
     })
 ]
+
+exports.delete_get = asyncHandler(async (req, res, next) => {
+    const [category, allGames] = await Promise.all([
+        Category.findById(req.params.id).exec(),
+        Game.find({category: req.params.id}).exec()
+    ])
+
+    if (category === null) res.redirect('/store/categories')
+
+    res.render("category_delete", {
+        title: 'Delete This Game',
+        category: category,
+        games: allGames
+    })
+})
+
+exports.delete_post = asyncHandler(async (req, res, next) => {
+    await Category.findByIdAndDelete(req.body.categoryid);
+    res.redirect('/store/categories')
+})

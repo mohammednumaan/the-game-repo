@@ -1,0 +1,23 @@
+extends layout 
+
+block content 
+
+    h1= title 
+    if games.length 
+        p #[strong Delete These Games Before Attempting To Delete This Book]
+        div
+            h4 Games 
+            ul 
+                for game in games
+                    li
+                        a(href=`${game.url}`)= game.name
+
+
+    else 
+        p Do You Really Want To Delete This Category?
+
+        form(method="POST")
+            div.form-group
+                input#categoryid.form-control(type='hidden', name='categoryid', value=category._id )
+
+            button.btn.btn-primary(type='submit') Delete
