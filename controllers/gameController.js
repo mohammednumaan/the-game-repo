@@ -1,6 +1,8 @@
 const Game = require("../models/game");
 const Category = require("../models/category")
 const asyncHandler = require("express-async-handler");
+const fs = require('fs');
+const path = require('path');
 const { body, validationResult } = require("express-validator");
 
 
@@ -86,7 +88,8 @@ exports.create_post = [
             description: req.body.desc,
             price: req.body.price,
             category: req.body.category,
-            stock: req.body.stock
+            stock: req.body.stock,
+            img: {data: fs.readFileSync('uploads/' + req.file.filename)}
         })
 
         if(!errors.isEmpty()){
@@ -174,6 +177,8 @@ exports.update_post = [
             price: req.body.price,
             category: req.body.category,
             stock: req.body.stock,
+            img: {data: fs.readFileSync('uploads/' + req.file.filename),
+            contentType: req.file.mimetype},
             _id: req.params.id
         })
 

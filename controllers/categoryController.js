@@ -2,7 +2,7 @@ const Game = require("../models/game");
 const Category = require("../models/category")
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
-
+const multer = require("multer");
 
 exports.category_list = asyncHandler(async (req, res, next) => {
     const allCategories = await Category.find().sort({name: 1}).exec()

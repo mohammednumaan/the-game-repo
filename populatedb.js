@@ -1,5 +1,7 @@
 #! /usr/bin/env node
 
+const fs = require('fs');
+
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 
@@ -37,14 +39,15 @@ async function categoryCreate(index, name, desc) {
 }
 
 
-async function gameCreate(index, name, dev, desc, price, category, stock) {
+async function gameCreate(index, name, dev, desc, price, category, stock, imgObj) {
   const gameDetail = {
     name: name,
     developer: dev,
     description: desc,
     price: price,
     category: category,
-    stock: stock
+    stock: stock,
+    img: imgObj
   };
 
   const game = new Game(gameDetail);
@@ -74,7 +77,8 @@ async function createGames() {
       "THE NEW FANTASY ACTION RPG. Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.",
       39.99,
       [categories[0]],
-      200
+      200,
+      {data: fs.readFileSync(__dirname + '/public/images/elden-ring.jpg'), contentType: 'image/jpg'}
     ),
     gameCreate(1,
       "Tekken 8",
@@ -82,7 +86,8 @@ async function createGames() {
       "Tekken 8 is a fighting game developed by Bandai Namco Studios and Arika.",
       69.99,
       [categories[0]],
-      100
+      100,
+      {data: fs.readFileSync(__dirname + '/public/images/tekken.jpeg'), contentType: 'image/jpg'}
     ),
     gameCreate(2,
       "Sid Meier's Civilization VI",
@@ -90,7 +95,9 @@ async function createGames() {
       "Sid Meier's Civilization VI is a turn-based strategy 4X video game developed by Firaxis Games and published by 2K.",
       30.15,
       [categories[1]],
-      250
+      250,
+      {data: fs.readFileSync(__dirname + '/public/images/civilization-4.jpg'), contentType: 'image/jpg'}
+
     ),
 
     gameCreate(3,
@@ -99,15 +106,18 @@ async function createGames() {
       "Victory is at your fingertips! Your ability to lead your nation is your supreme weapon, the strategy game Hearts of Iron IV lets you take command of any nation in World War II; the most engaging conflict in world history.",
       11.99,
       [categories[1]],
-      50
+      50,
+      {data: fs.readFileSync(__dirname + '/public/images/hearts-iron.jpg'), contentType: 'image/jpg'}
     ),
+
     gameCreate(4, 
       "NBA 2K24",
       "Visual Concepts	",
       "NBA 2K24 is a 2023 basketball video game developed by Visual Concepts Austin and published by 2K, based on the National Basketball Association.",
       9.59,
       [categories[2]],
-      300
+      300,
+      {data: fs.readFileSync(__dirname + '/public/images/nba.jpeg'), contentType: 'image/jpg'}
     ),
     
     gameCreate(5,
@@ -116,7 +126,8 @@ async function createGames() {
       "The classic action soccer game with the most up-to-date data! Enjoy the fever pitch of 'real soccer' in eFootball™ 2024!",
       11.99,
       [categories[2]],
-      456
+      456, 
+      {data: fs.readFileSync(__dirname + '/public/images/football.jpeg'), contentType: 'image/jpg'}
     )  
   ]);
   

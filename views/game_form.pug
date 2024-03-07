@@ -3,7 +3,7 @@ extends layout
 block content 
 
     h1= title 
-    form(method='POST')
+    form(method='POST' enctype="multipart/form-data")
         div.form-group
             label(for='name') Name: 
             input#name.form-control(type='text', placeholder='Name of The Game' name='name' required value=(undefined===game ? '' : game.name))
@@ -36,6 +36,10 @@ block content
                         else
                             input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id)
                         label(for=category._id) &nbsp;#{category.name}
+
+        div.form-group
+            label Upload Image 
+            input#img.form-control(type="file" name="image" required)
 
         button.btn.btn-primary(type='submit') Submit
 

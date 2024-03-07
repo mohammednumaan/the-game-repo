@@ -8,6 +8,7 @@ const GameSchema = new Schema({
     price: {type: Number, required: true},
     category: [{type: Schema.Types.ObjectId, ref:"Category"}],
     stock: {type: Number, required: true},
+    img: {data: Buffer, contentType: String}
 });
 
 GameSchema.virtual("url").get(function(){
