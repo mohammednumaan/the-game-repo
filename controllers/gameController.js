@@ -2,7 +2,6 @@ const Game = require("../models/game");
 const Category = require("../models/category")
 const asyncHandler = require("express-async-handler");
 const fs = require('fs');
-const path = require('path');
 const { body, validationResult } = require("express-validator");
 
 
@@ -136,7 +135,8 @@ exports.update_get = asyncHandler(async (req, res, next) => {
     res.render("game_form", {
         title: 'Update This Game',
         game: game,
-        categories: categories
+        categories: categories,
+        update: true
 
     })
 })
@@ -182,7 +182,18 @@ exports.update_post = [
             _id: req.params.id
         })
 
-        if (!errors.isEmpty()){
+        if (req.body.admin !== adminPassword){
+            res.render("game_form", {
+                title: 'Update This Game',
+                game: game,
+                categoriess: allCategories,
+                update: true,
+                permDenied: false
+            
+            })
+        } 
+
+        else if (!errors.isEmpty()){
             const allCategories = await Category.find({}).sort({name: 1}).exec();
 
             allCategories.forEach(category => {
@@ -193,7 +204,8 @@ exports.update_post = [
                 title: "Update This Game",
                 game: game,
                 categories: allCategories,
-                errors: errors.array()
+                errors: errors.array(),
+                update:true
             })
         }
 

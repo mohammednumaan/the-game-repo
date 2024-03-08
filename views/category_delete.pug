@@ -2,7 +2,7 @@ extends layout
 
 block content 
 
-    h1= title 
+    h2(class="section-title")= title 
     if games.length 
         p #[strong Delete These Games Before Attempting To Delete This Book]
         div
@@ -14,10 +14,14 @@ block content
 
 
     else 
-        p Do You Really Want To Delete This Category?
 
         form(method="POST")
             div.form-group
+                p Do You Really Want To Delete This Category?
+                input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
                 input#categoryid.form-control(type='hidden', name='categoryid', value=category._id )
 
-            button.btn.btn-primary(type='submit') Delete
+            button.submit-btn(type='submit') Delete
+
+        if error
+            p= error

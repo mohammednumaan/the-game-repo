@@ -2,12 +2,13 @@ extends layout
 
 block content 
 
-    h1= title 
+    h2(class="section-title")= title 
 
-    p Do You Really Want To Delete This Game?
 
     form(method="POST")
         div.form-group
+            p Do You Really Want To Delete This Game?
+            input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
             input#gameid.form-control(type="hidden", name="gameid", value=game._id)
 
-        button.btn.btn-primary(type='submit') Delete This Game
+        button.submit-btn(type='submit') Delete This Game

@@ -3,6 +3,9 @@ const Category = require("../models/category")
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 const multer = require("multer");
+const category = require("../models/category");
+
+const adminPassword = 'admin001';
 
 exports.category_list = asyncHandler(async (req, res, next) => {
     const allCategories = await Category.find().sort({name: 1}).exec()
@@ -33,7 +36,8 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 
 exports.create_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", {
-        title: 'Create A New Category'
+        title: 'Create A New Category',
+        update: false
     })
 })  
 
@@ -63,7 +67,8 @@ exports.create_post = [
             res.render("category_form", {
                 title: "Update This Category",
                 category: category,
-                errors: errors.array()
+                errors: errors.array(),
+                update: false
             })
         }
 
@@ -84,7 +89,8 @@ exports.update_get = asyncHandler(async (req, res, next) => {
     }
     res.render("category_form", {
         title: 'Update This Category',
-        category: category
+        category: category,
+        update: true
     })
 })
 
@@ -112,12 +118,22 @@ exports.update_post = [
             description: req.body["category-desc"],
             _id: req.params.id
         })
+        
+        if (req.body.admin !== adminPassword){
+            res.render("category_form", {
+                title: 'Update This Category',
+                category: category,
+                error: 'Denied! Enter Admin Password To Delete This Game!',
+                update: true
+            })
+        }
 
-        if (!errors.isEmpty()){
+        else if (!errors.isEmpty()){
             res.render("category_form", {
                 title: "Update This Category",
                 category: category,
-                errors: errors.array()
+                errors: errors.array(),
+                update: true
             })
         }
 
@@ -144,6 +160,26 @@ exports.delete_get = asyncHandler(async (req, res, next) => {
 })
 
 exports.delete_post = asyncHandler(async (req, res, next) => {
-    await Category.findByIdAndDelete(req.body.categoryid);
-    res.redirect('/store/categories')
+
+    const [category, allGames] = await Promise.all([
+        Category.findById(req.params.id).exec(),
+        Game.find({category: req.params.id}).exec()
+    ])
+
+    const userInput = req.body.admin;
+
+    if (userInput !== adminPassword){
+        
+        res.render("category_delete", {
+            title: 'Delete This Game',
+            category: category,
+            games: allGames,
+            error: 'Denied! Enter Admin Password To Delete This Game!'
+        })
+    }
+
+    else{
+        await Category.findByIdAndDelete(req.body.categoryid);
+        res.redirect('/store/categories')
+    }
 })

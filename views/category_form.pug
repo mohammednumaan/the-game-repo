@@ -2,19 +2,26 @@ extends layout
 
 block content 
 
-    h1= title 
+    h2(class='section-title')= title 
+    hr(class='category-form-hr')
     form(method="POST")
         div.form-group
             label(for="category-name") Name: 
-            input#category-name.form-control(type='text', placeholder='Name of The Category' name='category-name' required value=(undefined===category ? '' : category.name))
+            input#category-name.form-control(type='text', placeholder='Name of The Category...' name='category-name' required value=(undefined===category ? '' : category.name))
 
         div.form-group
-            label(for="category-desc") Description: 
-            input#category-desc.form-control(type='text', placeholder='Description' name='category-desc' required value=(undefined===category ? '' : category.description))
-
-        button.btn.btn-primary(type='submit') Submit
+            label(for="category-desc") Description 
+            textarea#category-desc.form-control(type='text', placeholder='Description...' name='category-desc' required style='width:200px')
+                = (undefined===category ? '' : category.description)
+        
+        if update
+            input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
+        button.submit-btn(type='submit') Submit
 
     if errors
         ul
         for error in errors
             li!= error.msg
+
+    if error 
+        p= error

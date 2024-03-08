@@ -1,50 +1,64 @@
 extends layout 
 
+
 block content 
+    - let update = false 
+    - let permDenied = true
 
-    h1= title 
+    h2(class='section-title')= title 
+    hr(class='game-form-hr')
     form(method='POST' enctype="multipart/form-data")
-        div.form-group
-            label(for='name') Name: 
-            input#name.form-control(type='text', placeholder='Name of The Game' name='name' required value=(undefined===game ? '' : game.name))
-        
-        div.form-group
-            label(for='dev') Developer: 
-            input#dev.form-control(type='text', placeholder='Developer' name='dev' required value=(undefined===game ? '' : game.developer))
-    
+
+        div.form-top
+            div.form-group
+                label(for='name') Name <span style="color:red">*</span>
+                input#name.form-control(type='text', placeholder='Name of The Game...' name='name' required value=(undefined===game ? '' : game.name))
             
-        div.form-group
-            label(for='desc') Description: 
-            input#desc.form-control(type='text', placeholder='Description' name='desc' required value=(undefined===game ? '' : game.description))
-
+            div.form-group
+                label(for='dev') Developer <span style="color:red">*</span>
+                input#dev.form-control(type='text', placeholder='Developer...' name='dev' required value=(undefined===game ? '' : game.developer))
+        
         
         div.form-group
-            label(for='price') Price: 
-            input#price.form-control(type='text', placeholder='Price' name='price' required value=(undefined===game ? '' : game.price))
-        
-        div.form-group
-            label(for='stock') In-Stock: 
-            input#stock.form-control(type='text', placeholder='In-Stock' name='stock' required value=(undefined===game ? '' : game.stock))
- 
-        div.form-group
-            label Category: 
-            div 
-                for category in categories 
-                    div(style='display: inline; padding-right:10px;')
-                        if category.checked
-                            input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked)
-                        else
-                            input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id)
-                        label(for=category._id) &nbsp;#{category.name}
+            label(for='desc') Description <span style="color:red">*</span>
+            textarea#desc.form-control(type='text', placeholder='Description...' name='desc' required)
+                = (undefined===game ? '' : game.description)
 
-        div.form-group
-            label Upload Image 
-            input#img.form-control(type="file" name="image" required)
+        div.form-mid
+            div.form-group
+                label(for='price') Price <span style="color:red">*</span> 
+                input#price.form-control(type='number', placeholder='Price...' name='price' required value=(undefined===game ? '' : game.price))
+            
+            div.form-group
+                label(for='stock') In-Stock <span style="color:red">*</span>
+                input#stock.form-control(type='number', placeholder='In-Stock...' name='stock' required value=(undefined===game ? '' : game.stock))
 
-        button.btn.btn-primary(type='submit') Submit
+        div.form-bottom
+            div.form-group
+                label Category <span style="color:red">*</span>
+                div 
+                    for category in categories 
+                        div(style='display: inline; padding-right:10px;')
+                            if category.checked
+                                input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id, checked)
+                            else
+                                input.checkbox-input(type='checkbox', name='category', id=category._id, value=category._id)
+                            label(name="form-category-name" for=category._id) &nbsp;#{category.name}
+
+            div.form-group
+                label Upload Image <span style="color:red">*</span> 
+                input#img.form-control(type="file" name="image" required)
+
+        if update
+            input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
+
+        button.submit-btn(type='submit') Submit
 
 
     if errors
         ul
         for error in errors
             li!= error.msg
+    
+    if permDenied == false 
+     p= 'Permission Denied. Only An Admin Can Delete This Game!'
