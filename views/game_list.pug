@@ -2,6 +2,7 @@ extends layout
 
 block content 
     h2(class='section-title')= title 
+    hr(style="width:130px")
     if games.length
         ul(id="game-list") 
             each game in games

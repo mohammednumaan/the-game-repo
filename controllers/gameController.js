@@ -4,6 +4,7 @@ const asyncHandler = require("express-async-handler");
 const fs = require('fs');
 const { body, validationResult } = require("express-validator");
 
+const adminPassword ='admin001';
 
 exports.index = asyncHandler(async (req, res, next) => {
     const [gameCount, categoryCount] = await Promise.all([
@@ -136,7 +137,8 @@ exports.update_get = asyncHandler(async (req, res, next) => {
         title: 'Update This Game',
         game: game,
         categories: categories,
-        update: true
+        show: true,
+        admin: true
 
     })
 })
@@ -169,16 +171,20 @@ exports.update_post = [
 
       asyncHandler(async (req, res, next) => {
         const errors = validationResult(req);
+        const [currentGame, allCategories] = await Promise.all([
+            Game.findById(req.params.id).exec(),
+            Category.find().exec()
+        ])
 
         const game = new Game({
             name: req.body.name,
-            developer: req.body.developer,
-            description: req.body.description,
+            developer: req.body.dev,
+            description: req.body.desc,
             price: req.body.price,
             category: req.body.category,
             stock: req.body.stock,
-            img: {data: fs.readFileSync('uploads/' + req.file.filename),
-            contentType: req.file.mimetype},
+            img: (req.file) ? {data: fs.readFileSync('uploads/' + req.file.filename),
+            contentType: req.file.mimetype} : currentGame.img,
             _id: req.params.id
         })
 
@@ -186,10 +192,9 @@ exports.update_post = [
             res.render("game_form", {
                 title: 'Update This Game',
                 game: game,
-                categoriess: allCategories,
-                update: true,
-                permDenied: false
-            
+                categories: allCategories,
+                show: true,
+                admin:false
             })
         } 
 
@@ -205,7 +210,8 @@ exports.update_post = [
                 game: game,
                 categories: allCategories,
                 errors: errors.array(),
-                update:true
+                show: true,
+                admin: true
             })
         }
 
@@ -223,11 +229,24 @@ exports.delete_get = asyncHandler(async (req, res, next) => {
 
     res.render("game_delete", {
         title: 'Delete This Game',
-        game: game
+        game: game,
+        permDenied: false
     })
 })
 
 exports.delete_post = asyncHandler(async (req, res, next) => {
-    await Game.findByIdAndDelete(req.body.gameid);
-    res.redirect('/store/games')
+    const game = await Game.findById(req.params.id).exec();
+
+    if (req.body.admin !== adminPassword){
+        res.render("game_delete", {
+            title: 'Delete This Game',
+            game: game,
+            permDenied: true
+        })
+    }
+
+    else{
+        await Game.findByIdAndDelete(req.body.gameid);
+        res.redirect('/store/games')
+    }
 })

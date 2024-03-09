@@ -2,8 +2,11 @@ extends layout
 
 block content 
 
+    - let showPassInput = show
+    - let isAdmin = admin
+    
     h2(class='section-title')= title 
-    hr(class='category-form-hr')
+    hr(style="width:150px")
     form(method="POST")
         div.form-group
             label(for="category-name") Name: 
@@ -14,14 +17,14 @@ block content
             textarea#category-desc.form-control(type='text', placeholder='Description...' name='category-desc' required style='width:200px')
                 = (undefined===category ? '' : category.description)
         
-        if update
+        if showPassInput
             input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
         button.submit-btn(type='submit') Submit
 
     if errors
         ul
         for error in errors
-            li!= error.msg
+            li(style="text-align:center; color:red")= error.msg
 
-    if error 
-        p= error
+    if isAdmin === false 
+        p(style="text-align:center; color:red")= 'Permission Denied. Only An Adming Can Modify This Category!'

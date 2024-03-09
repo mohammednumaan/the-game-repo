@@ -12,3 +12,7 @@ block content
             input#gameid.form-control(type="hidden", name="gameid", value=game._id)
 
         button.submit-btn(type='submit') Delete This Game
+
+
+    if permDenied 
+        p(style="text-align:center; color:red")= 'Permssion Denied. Only An Admin Can Modify This Category!'

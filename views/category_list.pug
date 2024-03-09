@@ -2,6 +2,7 @@ extends layout
 
 block content 
     h2(class='section-title')= title 
+    hr(style="width:130px")
     if categories.length
         ul(id="category-list") 
             each category in categories

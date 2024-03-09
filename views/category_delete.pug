@@ -3,14 +3,14 @@ extends layout
 block content 
 
     h2(class="section-title")= title 
+    hr(style="width:100px")
     if games.length 
-        p #[strong Delete These Games Before Attempting To Delete This Book]
-        div
-            h4 Games 
-            ul 
-                for game in games
-                    li
-                        a(href=`${game.url}`)= game.name
+        p(style="text-align:center; color:lightblue") #[strong Delete These Games Before Attempting To Delete This Category]
+        div(class="category-games")
+            each game in games 
+                a(href=`${game.url}` class="category-game-card")
+                    h3= game.name
+                    p= game.developer
 
 
     else 
@@ -23,5 +23,5 @@ block content
 
             button.submit-btn(type='submit') Delete
 
-        if error
-            p= error
+        if permDenied
+            p(style="text-align:center; color:red")= 'Permssion Denied. Only An Admin Can Modify This Category!'

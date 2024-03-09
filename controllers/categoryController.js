@@ -37,7 +37,6 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 exports.create_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", {
         title: 'Create A New Category',
-        update: false
     })
 })  
 
@@ -68,7 +67,6 @@ exports.create_post = [
                 title: "Update This Category",
                 category: category,
                 errors: errors.array(),
-                update: false
             })
         }
 
@@ -90,7 +88,8 @@ exports.update_get = asyncHandler(async (req, res, next) => {
     res.render("category_form", {
         title: 'Update This Category',
         category: category,
-        update: true
+        show: true,
+        admin: true
     })
 })
 
@@ -123,8 +122,8 @@ exports.update_post = [
             res.render("category_form", {
                 title: 'Update This Category',
                 category: category,
-                error: 'Denied! Enter Admin Password To Delete This Game!',
-                update: true
+                show: true,
+                admin: false
             })
         }
 
@@ -133,7 +132,8 @@ exports.update_post = [
                 title: "Update This Category",
                 category: category,
                 errors: errors.array(),
-                update: true
+                show: true,
+                admin:true
             })
         }
 
@@ -155,7 +155,8 @@ exports.delete_get = asyncHandler(async (req, res, next) => {
     res.render("category_delete", {
         title: 'Delete This Game',
         category: category,
-        games: allGames
+        games: allGames,
+        permDenied: false
     })
 })
 
@@ -171,10 +172,10 @@ exports.delete_post = asyncHandler(async (req, res, next) => {
     if (userInput !== adminPassword){
         
         res.render("category_delete", {
-            title: 'Delete This Game',
+            title: 'Delete This Category',
             category: category,
             games: allGames,
-            error: 'Denied! Enter Admin Password To Delete This Game!'
+            permDenied: true
         })
     }
 

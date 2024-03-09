@@ -2,27 +2,29 @@ extends layout
 
 
 block content 
-    - let update = false 
-    - let permDenied = true
+    p= permDenied
+    - let showPassInput = show
+    - let isAdmin = admin
+
 
     h2(class='section-title')= title 
-    hr(class='game-form-hr')
+    hr(style="width:130px")
     form(method='POST' enctype="multipart/form-data")
 
         div.form-top
             div.form-group
                 label(for='name') Name <span style="color:red">*</span>
-                input#name.form-control(type='text', placeholder='Name of The Game...' name='name' required value=(undefined===game ? '' : game.name))
+                input#name.form-control(type='text', placeholder='Name of The Game...' name='name' required value=(undefined === game ? '' : game.name))
             
             div.form-group
                 label(for='dev') Developer <span style="color:red">*</span>
-                input#dev.form-control(type='text', placeholder='Developer...' name='dev' required value=(undefined===game ? '' : game.developer))
+                input#dev.form-control(type='text', placeholder='Developer...' name='dev' required value=(undefined === game ? '' : game.developer))
         
         
         div.form-group
             label(for='desc') Description <span style="color:red">*</span>
             textarea#desc.form-control(type='text', placeholder='Description...' name='desc' required)
-                = (undefined===game ? '' : game.description)
+                = (undefined === game ? '' : game.description)
 
         div.form-mid
             div.form-group
@@ -46,10 +48,15 @@ block content
                             label(name="form-category-name" for=category._id) &nbsp;#{category.name}
 
             div.form-group
-                label Upload Image <span style="color:red">*</span> 
-                input#img.form-control(type="file" name="image" required)
+                unless show 
+                    label Upload Image <span style="color:red">*</span>
+                    input#img.form-control(type="file" name="image" required)
 
-        if update
+                else 
+                    label Upload Image (Not Mandatory)
+                    input#img.form-control(type="file" name="image")
+
+        if showPassInput
             input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
 
         button.submit-btn(type='submit') Submit
@@ -58,7 +65,7 @@ block content
     if errors
         ul
         for error in errors
-            li!= error.msg
+            li(style="text-align:center; color:red")= error.msg
     
-    if permDenied == false 
-     p= 'Permission Denied. Only An Admin Can Delete This Game!'
+    if isAdmin == false 
+     p(style="text-align:center; color:red")= 'Permission Denied. Only An Admin Can Modify This Game!'
