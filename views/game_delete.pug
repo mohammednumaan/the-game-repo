@@ -1,18 +1,21 @@
-extends layout 
+extends layout
 
-block content 
+block content
+  h2.page-title= title
+  hr(style="width:100px")
 
-    h2(class="section-title")= title 
+  form(method="POST")
+    .form-group
+      p Do You Really Want To Delete This Game?
+      input#admin.form-control(
+        type="text",
+        name="admin",
+        placeholder="Enter Admin Password (Password: admin001)",
+        style="width: 300px"
+      )
+      input#gameid.form-control(type="hidden", name="gameid", value=game._id)
 
+    button.submit-btn(type="submit") Delete This Game
 
-    form(method="POST")
-        div.form-group
-            p Do You Really Want To Delete This Game?
-            input#admin.form-control(type='text', name="admin" placeholder='Enter Admin Password (Password: admin001)' style="width:300px")
-            input#gameid.form-control(type="hidden", name="gameid", value=game._id)
-
-        button.submit-btn(type='submit') Delete This Game
-
-
-    if permDenied 
-        p(style="text-align:center; color:red")= 'Permssion Denied. Only An Admin Can Modify This Category!'
+  if permDenied
+    p(style="text-align: center; color: red")= "Permssion Denied. Only An Admin Can Modify This Category!"

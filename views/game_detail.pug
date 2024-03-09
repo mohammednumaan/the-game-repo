@@ -1,29 +1,32 @@
-extends layout 
+extends layout
 
-block content 
+block content
+  .game-info
+    .game-info-container
+      img(
+        src=game.img.data !== undefined ? "data:image/jpg;base64," + `${Buffer.from(game.img.data).toString("base64")}` : "",
+        width="106.4%",
+        style="margin-top: -19px; border-radius: 7px"
+      )
 
-    div(class="game-info")
-        div(class="game-info-container")
+      .game-info-top
+        h1= game.name
+        p#game-dev= game.developer
 
-            img(src=(game.img.data !== undefined) ? "data:image/jpg;base64," + `${Buffer.from(game.img.data).toString('base64')}` : '' 
-            width='106.4%' style="margin-top: -19px;border-radius: 7px;")
+      .game-info-bottom
+        h4(style="text-align:center") #{ game.description }
 
-            div(class="game-top")
-                h1= game.name 
-                p(id="game-dev")= game.developer
+        .game-info-details
+          p Category:
+          if game.category.length
+            each val, index in game.category
+              a.game-info-category-url(href=val.url)= (index < game.category.length - 1) ? val.name + "," : val.name
+          else 
+            p.game-info-category-url Not Added
 
-            div(class="game-bottom")
-                h4 #{game.description}
+          p In-Stock: #{ game.stock }
+          p Price: $#{ game.price }
 
-                div(class="game-buy-details")
-                    p Category:
-                    each val, index in game.category
-                        a(class="category-url" href=val.url)= (index < game.category.length - 1) ? val.name + ',' : val.name
-                            
-                    p In-Stock: #{game.stock}
-                    p Price: $#{game.price}
-
-                    
-                div(class="game-buy-links")
-                    a(href= game.url + '/delete') Delete This Game
-                    a(href= game.url + '/update') Update This Game
+        .game-info-modify
+          a(href=game.url + "/delete") Delete This Game
+          a(href=game.url + "/update") Update This Game

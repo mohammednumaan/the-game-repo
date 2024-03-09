@@ -1,0 +1,63 @@
+/* CARD STYLES */
+.card,
+.game-card,
+.category-card{
+  background-color: var(--greyColor);
+  border-radius: 0.75em;
+  cursor: pointer;
+  width: 400px;
+  height: 240px;
+  position: relative;
+}
+
+.card:hover:before,
+.game-card:hover:before,
+.category-card:hover:before{
+  opacity: 1;
+}
+
+.card:before,
+.game-card:before,
+.category-card:before {
+  background: linear-gradient(
+    45deg,
+    transparent 5%,
+    var(--goldColor) 50%,
+    transparent 99%
+  );
+  border-radius: inherit;
+  content: "";
+  inset: 0px;
+  opacity: 0;
+  position: absolute;
+  transition: opacity 400ms;
+  z-index: 0;
+}
+
+.card-content, 
+.game-card-content,
+.category-card-content{
+  background-color: var(--greyColor);
+  border-radius: inherit;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  inset: 1px;
+  padding: 1em;
+  position: absolute;
+}
+
+.game-card{
+  height: 450px;
+}
+
+.category-info-game-card{
+  background-color: var(--greyColor);
+  margin-top: 40px;
+  width: 300px;
+  padding: 4px;
+  border-radius: 10px;
+}

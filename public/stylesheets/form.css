@@ -1,0 +1,109 @@
+/* FORM STYLES */
+form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 20px;
+  
+    margin-top: 20px;
+    flex-wrap: wrap;
+    padding: 20px;
+  
+    width: 500px;
+    margin-left: 32%;
+    background: var(--greyColor);
+    border-radius: 10px;
+    box-shadow: var(--goldColor) -5px 5px, var(--greyColor) -10px 10px;
+  
+}
+
+/* LABELS AND INPUT FIELDS STYLES */
+label{
+    font-size: 30px;
+    color: lightblue;
+}
+  
+input[type='text'],
+input[type='number']{
+    width: 200px;
+    height: 20px;
+    outline: none;
+    padding: 4px;
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+textarea:focus{
+    border: 3px solid var(--goldColor);
+}
+
+input[type='file']{
+    margin-left: 40px;
+    opacity: 0.8;
+}
+
+input::file-selector-button{
+    border: 2px solid var(--goldColor);
+    padding: 0.2em 0.4em;
+    border-radius: 0.2em;
+}
+
+textarea{
+    outline: none;
+    padding: 4px;
+    width: 470px;
+    height: 60px;
+}
+
+.checkbox-input{
+    outline: none;
+    height: 20px;
+    width: 20px;
+}
+
+/* FORM GROUP AND SECTIONS STYLES */
+.form-group{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-form-top{
+    display: flex;
+    gap: 60px;
+}
+
+.game-form-mid{
+    display: flex;
+    gap: 60px;
+}
+
+.game-form-bottom{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.game-form-category-name{
+    opacity: 0.8;
+}
+
+/* SUBMIT BUTTON STYLES */
+.submit-btn{
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: var(--goldColor) 0px 2px 12px;
+
+    border: 1px solid var(--goldColor);
+    border-radius: 10px;
+
+    background-color: lightblue;
+    color: var(--greyColor);
+
+    width: 210px;
+    height: 30px;
+}
+

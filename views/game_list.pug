@@ -1,20 +1,21 @@
-extends layout 
+extends layout
 
-block content 
-    h2(class='section-title')= title 
-    hr(style="width:130px")
-    if games.length
-        ul(id="game-list") 
-            each game in games
-                li 
-                    a(href=game.url)
-
-                        div(class='game-card')
-                            div(class='game-card-content')
-                                img(src=((game.img.data !== undefined) ? ("data:image/jpg;base64," + `${Buffer.from(game.img.data).toString('base64')}`) : '') 
-                                width='108.4%' height='100%' style="border-radius: 10px; margin-top: -15.6px")
-                                h2= game.name
-                                hr
-                                p #{game.description}
-                                
-                    
+block content
+  h2.page-title= title
+  hr(style="width: 130px")
+  if games.length
+    ul#game-list
+      each game in games
+        li
+          a(href=game.url)
+            .game-card
+              .game-card-content
+                img(
+                  src=game.img.data !== undefined ? "data:image/jpg;base64," + `${Buffer.from(game.img.data).toString("base64")}` : "",
+                  width="108.4%",
+                  height="100%",
+                  style="border-radius: 10px; margin-top: -15.6px"
+                )
+                h2= game.name
+                hr(style="width:80px")
+                p #{ game.description }

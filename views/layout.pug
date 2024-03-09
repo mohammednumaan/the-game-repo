@@ -2,18 +2,20 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel="stylesheet", href="/stylesheets/style.css")
+    link(rel="stylesheet", href="/stylesheets/card.css")
+    link(rel="stylesheet", href="/stylesheets/list-details.css")
+    link(rel="stylesheet", href="/stylesheets/form.css")
   body
-
     block heading
-      div(class="header-container")
+      .header-container
         h1 The Game Repository
-        div(class='nav-links')
-          a(href='/store') Home
-          a(href='/store/games') Games
-          a(href='/store/categories') Categories
-          a(href='/store/game/create') Create Game 
-          a(href='/store/category/create') Create Category
+        .nav-links
+          a(href="/store") Home
+          a(href="/store/games") Games
+          a(href="/store/categories") Categories
+          a(href="/store/game/create") Create Game
+          a(href="/store/category/create") Create Category
 
-    div(class='content')     
+    .content
       block content
