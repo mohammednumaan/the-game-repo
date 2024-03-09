@@ -4,7 +4,7 @@ block content
   h2.page-title= title
   hr(style="width: 100px")
   if games.length
-    p(style="text-align:center; color:red") #[strong Delete These Games Before Attempting To Delete This Category]
+    p(style="text-align: center; color: red") #[strong Delete These Games Before Attempting To Delete This Category]
     .category-info-game-list
       each game in games 
         a.category-info-game-card(href=`${game.url}`)

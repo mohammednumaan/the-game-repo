@@ -58,7 +58,7 @@ block content
           placeholder="In-Stock...",
           name="stock",
           min=0,
-          max=10000000
+          max=10000000,
           required,
           value=undefined === game ? "" : game.stock
         )
@@ -82,7 +82,7 @@ block content
                   type="checkbox",
                   name="category",
                   id=category._id,
-                  value=category._id,
+                  value=category._id
                 )
               label(name="game-form-category-name", for=category._id) &nbsp;#{ category.name }
 

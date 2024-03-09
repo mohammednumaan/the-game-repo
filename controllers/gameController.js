@@ -13,7 +13,7 @@ exports.index = asyncHandler(async (req, res, next) => {
   ]);
 
   res.render("index", {
-    title: 'Inventory',
+    title: "Inventory",
     games: gameCount,
     categories: categoryCount,
   });
@@ -64,20 +64,30 @@ exports.create_post = [
     next();
   },
 
-  body("name", "Game Name must not be empty.").trim().isLength({ min: 3 }).withMessage('Game Name Must Be Atleast 3 Characters.').escape(),
+  body("name", "Game Name must not be empty.")
+    .trim()
+    .isLength({ min: 3 })
+    .withMessage("Game Name Must Be Atleast 3 Characters.")
+    .escape(),
   body("dev", "GameDeveloper must not be empty.")
     .trim()
     .isLength({ min: 3 })
-    .withMessage('Game Developer Must Be Atleast 3 Characters.')
+    .withMessage("Game Developer Must Be Atleast 3 Characters.")
     .escape(),
   body("desc", "Game Description must not be empty.")
     .trim()
     .isLength({ min: 3 })
-    .withMessage('Game Description Must Be Atleast 3 Characters.')
+    .withMessage("Game Description Must Be Atleast 3 Characters.")
     .escape(),
 
-  body("price", "Game Price must not be empty").trim().isLength({ min: 1 }).escape(),
-  body("stock", "Game Stock must not be empty").trim().isLength({ min: 1 }).escape(),
+  body("price", "Game Price must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
+  body("stock", "Game Stock must not be empty")
+    .trim()
+    .isLength({ min: 1 })
+    .escape(),
   body("category.*").escape(),
 
   asyncHandler(async (req, res, next) => {

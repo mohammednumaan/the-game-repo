@@ -4,6 +4,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
+const compression = require("compression");
+const helmet = require("helmet");
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -11,6 +13,13 @@ const storeRouter = require('./routes/store');
 
 const app = express();
 const mongoose = require("mongoose");
+
+const RateLimit = require("express-rate-limit");
+const limiter = RateLimit({
+  windowMs: 1 * 60 * 1000, 
+  max: 50,
+});
+
 
 // Set up Mongoose Connection
 mongoose.set("strictQuery", false);
@@ -29,6 +38,9 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+app.use(compression());
+app.use(helmet());
+app.use(limiter);
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);

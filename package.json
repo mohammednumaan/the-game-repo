@@ -2,11 +2,13 @@
   "name": "the-game-repo",
   "version": "0.0.0",
   "private": true,
+  "engines": {
+    "node": ">=v20.5.1"
+  },
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www",
     "serverstart": "DEBUG=express-locallibrary-tutorial:* npm run devstart",
-
     "lint": "npx eslint --ignore-pattern node_modules/ ",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "npx prettier **/*.js --check",
@@ -15,12 +17,15 @@
     "formatPug": "npx prettier --write '**/*.pug' --plugin='@prettier/plugin-pug'"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "dotenv": "^16.4.5",
     "express": "~4.16.1",
     "express-async-handler": "^1.2.0",
+    "express-rate-limit": "^7.2.0",
     "express-validator": "^7.0.1",
+    "helmet": "^7.1.0",
     "http-errors": "~1.6.3",
     "mongoose": "^8.2.0",
     "morgan": "~1.9.1",
@@ -28,9 +33,10 @@
     "pug": "2.0.0-beta11"
   },
   "devDependencies": {
+    "@prettier/plugin-pug": "^3.0.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "nodemon": "^3.1.0",
-    "prettier": "3.2.5"
+    "prettier": "^3.2.5"
   }
 }

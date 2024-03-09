@@ -14,14 +14,14 @@ block content
         p#game-dev= game.developer
 
       .game-info-bottom
-        h4(style="text-align:center") #{ game.description }
+        h4(style="text-align: center") #{ game.description }
 
         .game-info-details
           p Category:
           if game.category.length
             each val, index in game.category
-              a.game-info-category-url(href=val.url)= (index < game.category.length - 1) ? val.name + "," : val.name
-          else 
+              a.game-info-category-url(href=val.url)= index < game.category.length - 1 ? val.name + "," : val.name
+          else
             p.game-info-category-url Not Added
 
           p In-Stock: #{ game.stock }
